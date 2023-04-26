@@ -195,7 +195,20 @@ namespace NotesCommandLine
 
         private static void ReadNote()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Please enter file name.\n");
+            string FileName = Console.ReadLine().ToLower();
+
+            if (File.Exists(NoteDirectory + FileName))
+            {
+                XmlDocument Doc = new XmlDocument();
+                Doc.Load(NoteDirectory + FileName);
+
+                Console.WriteLine(Doc.SelectSingleNode("//body").InnerText);
+            }
+            else
+            {
+                Console.WriteLine("File not found");
+            }
         }
 
         private static void EditNote()
